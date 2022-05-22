@@ -24,9 +24,9 @@ public class UsuarioController {
         this.entityDtoConverter = entityDtoConverter;
     }
 
-    @PostMapping
-    public ResponseEntity<UsuarioResponse> getUsuarioInfo(@RequestBody UsuarioRequest usuarioRequest) throws Exception {
-        Usuario usuario = usuarioService.getUsuarioInfo(usuarioRequest);
+    @GetMapping
+    public ResponseEntity<UsuarioResponse> getUsuarioInfo() throws Exception {
+        Usuario usuario = usuarioService.getUsuarioInfo();
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoUser(usuario),
                                     HttpStatus.OK);
     }

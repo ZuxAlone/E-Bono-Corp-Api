@@ -1,6 +1,5 @@
 package com.ebono.bonosapi.common;
 
-import com.ebono.bonosapi.dto.UsuarioRequest;
 import com.ebono.bonosapi.dto.UsuarioResponse;
 import com.ebono.bonosapi.entities.Usuario;
 import org.modelmapper.ModelMapper;
