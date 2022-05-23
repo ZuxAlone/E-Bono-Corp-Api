@@ -1,7 +1,9 @@
 package com.ebono.bonosapi.common;
 
+import com.ebono.bonosapi.dto.MetodoFinancieroResponse;
 import com.ebono.bonosapi.dto.TipoCambioResponse;
 import com.ebono.bonosapi.dto.UsuarioResponse;
+import com.ebono.bonosapi.entities.MetodoFinanciero;
 import com.ebono.bonosapi.entities.TipoCambio;
 import com.ebono.bonosapi.entities.Usuario;
 import org.modelmapper.ModelMapper;
@@ -23,5 +25,9 @@ public class EntityDtoConverter {
 
     public TipoCambioResponse convertEntityToDtoTipoCambio(TipoCambio tipoCambio) {
         return modelMapper.map(tipoCambio, TipoCambioResponse.class);
+    }
+
+    public MetodoFinancieroResponse convertEntityToDtoMetodoFinanciero(MetodoFinanciero metodoFinanciero) {
+        return modelMapper.map(metodoFinanciero, MetodoFinancieroResponse.class);
     }
 }
