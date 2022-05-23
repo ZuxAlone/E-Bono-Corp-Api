@@ -1,17 +1,15 @@
 package com.ebono.bonosapi.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.time.LocalTime;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SignupResponse {
     private String nombres;
     private String apellidos;
     private String correo;
-    private LocalTime localTime;
+    private String localDateTime;
 }
