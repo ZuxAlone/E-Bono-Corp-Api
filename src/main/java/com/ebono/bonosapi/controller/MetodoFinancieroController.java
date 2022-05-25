@@ -42,7 +42,13 @@ public class MetodoFinancieroController {
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoMetodoFinanciero(metodoFinanciero), HttpStatus.OK);
     }
 
-    @DeleteMapping("/id")
+    @GetMapping("/get/{metodo}")
+    public ResponseEntity<MetodoFinancieroResponse> getMetodoFinancieroByMetodo(@PathVariable String metodo) throws Exception {
+        MetodoFinanciero metodoFinanciero = metodoFinancieroService.getMetodoFinancieroByMetodo(metodo);
+        return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoMetodoFinanciero(metodoFinanciero), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMetodoFinanciero(@PathVariable Long id) throws Exception {
         metodoFinancieroService.deleteMetodoFinanciero(id);
         return new ResponseEntity<Void>(HttpStatus.OK);

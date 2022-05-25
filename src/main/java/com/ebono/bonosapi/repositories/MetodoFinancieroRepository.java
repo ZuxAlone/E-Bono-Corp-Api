@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MetodoFinancieroRepository extends JpaRepository<MetodoFinanciero, Long> {
+    MetodoFinanciero findMetodoFinancieroByMetodo(String metodo);
 }
