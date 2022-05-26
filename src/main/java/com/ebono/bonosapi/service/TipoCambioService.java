@@ -22,7 +22,7 @@ public class TipoCambioService {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public TipoCambio addTipoCambio(TipoCambioRequest tipoCambioRequest) {
         TipoCambio tipoCambio = new TipoCambio();
-        tipoCambio.setTipo_cambio(tipoCambioRequest.getTipo_cambio());
+        tipoCambio.setTipoCambio(tipoCambioRequest.getTipoCambio());
         tipoCambio.setDetalle(tipoCambioRequest.getDetalle());
         return tipoCambioRepository.save(tipoCambio);
     }
@@ -31,7 +31,7 @@ public class TipoCambioService {
     public TipoCambio updateTipoCambio(Long id, TipoCambioRequest tipoCambioRequest){
         TipoCambio tipoCambio = tipoCambioRepository.findById(id)
                 .orElseThrow(() -> ResourceNotFoundException.byIndex("Tipo Cambio", id));
-        tipoCambio.setTipo_cambio(tipoCambioRequest.getTipo_cambio());
+        tipoCambio.setTipoCambio(tipoCambioRequest.getTipoCambio());
         tipoCambio.setDetalle(tipoCambioRequest.getDetalle());
         return tipoCambioRepository.save(tipoCambio);
     }
@@ -40,6 +40,13 @@ public class TipoCambioService {
     public TipoCambio getTipoCambio(Long id) {
         TipoCambio tipoCambio = tipoCambioRepository.findById(id)
                 .orElseThrow(() -> ResourceNotFoundException.byIndex("Tipo Cambio", id));
+        return tipoCambio;
+    }
+
+    @Transactional(readOnly = true)
+    public TipoCambio getTipoCambioByMoneda(Character moneda) {
+        TipoCambio tipoCambio = tipoCambioRepository.findTipoCambioByTipoCambio(moneda);
+        if (tipoCambio == null) throw new ResourceNotFoundException("No existe el tipo de moneda");
         return tipoCambio;
     }
 

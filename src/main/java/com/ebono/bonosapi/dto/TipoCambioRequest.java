@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TipoCambioRequest {
-    private Character tipo_cambio;
+    private Character tipoCambio;
     private String detalle;
 }

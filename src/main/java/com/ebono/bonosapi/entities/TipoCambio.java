@@ -19,7 +19,7 @@ public class TipoCambio {
     private Long id;
 
     @Column(name = "Tipo_de_cambio")
-    private Character tipo_cambio;
+    private Character tipoCambio;
 
     @Column(name = "Detalle")
     private String detalle;

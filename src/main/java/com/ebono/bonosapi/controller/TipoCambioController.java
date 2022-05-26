@@ -42,6 +42,12 @@ public class TipoCambioController {
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoTipoCambio(tipoCambio), HttpStatus.OK);
     }
 
+    @GetMapping("/get/{moneda}")
+    public ResponseEntity<TipoCambioResponse> getTipoCambioByMoneda(@PathVariable Character moneda) throws Exception {
+        TipoCambio tipoCambio = tipoCambioService.getTipoCambioByMoneda(moneda);
+        return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoTipoCambio(tipoCambio), HttpStatus.OK);
+    }
+
     @DeleteMapping("/id")
     public ResponseEntity<Void> deleteTipoCambio(@PathVariable Long id) throws Exception {
         tipoCambioService.deleteTipoCambio(id);
