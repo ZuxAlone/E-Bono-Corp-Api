@@ -10,6 +10,8 @@ import lombok.*;
 public class BonoResponse {
     private Long id;
     private Double valorNominal;
+    private String periodoPago;
+    private Integer numeroPeriodos;
     private Double anualidad;
     private Double van;
     private Double tir;

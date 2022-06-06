@@ -67,6 +67,9 @@ public class Bono {
     @Column(name = "Convexidad")
     private Double convexidad;
 
+    @Column(name = "IsPrimario")
+    private Boolean isPrimario;
+
     @Transient
-    private List<Double> anualidades;
+    public List<Double> anualidades;
 }

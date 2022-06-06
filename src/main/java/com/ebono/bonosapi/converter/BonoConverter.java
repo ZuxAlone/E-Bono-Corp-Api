@@ -12,6 +12,8 @@ public class BonoConverter {
         return BonoResponse.builder()
                 .id(bono.getId())
                 .valorNominal(bono.getValorNominal())
+                .periodoPago(bono.getPeriodoPago())
+                .numeroPeriodos(bono.getNumeroPeriodos())
                 .anualidad(bono.getAnualidad())
                 .van(bono.getVan())
                 .tir(bono.getTir())
