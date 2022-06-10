@@ -9,8 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 public class BonoResponse {
     private Long id;
+    private UsuarioResponse usuarioResponse;
+    private Character tipoCambio;
+    private String metodoFinanciero;
     private Double valorNominal;
     private String periodoPago;
+    private Double tasaPeriodo;
     private Integer numeroPeriodos;
     private Double anualidad;
     private Double van;

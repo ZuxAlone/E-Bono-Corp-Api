@@ -10,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class EntityDtoConverter {
 
@@ -29,5 +32,17 @@ public class EntityDtoConverter {
 
     public MetodoFinancieroResponse convertEntityToDtoMetodoFinanciero(MetodoFinanciero metodoFinanciero) {
         return modelMapper.map(metodoFinanciero, MetodoFinancieroResponse.class);
+    }
+
+    public List<TipoCambioResponse> convertEntityToDtoTipoCambio(List<TipoCambio> tipoCambios) {
+        return tipoCambios.stream()
+                .map(this::convertEntityToDtoTipoCambio)
+                .collect(Collectors.toList());
+    }
+
+    public List<MetodoFinancieroResponse> convertEntityToDtoMetodoFinanciero(List<MetodoFinanciero> metodoFinancieros) {
+        return metodoFinancieros.stream()
+                .map(this::convertEntityToDtoMetodoFinanciero)
+                .collect(Collectors.toList());
     }
 }

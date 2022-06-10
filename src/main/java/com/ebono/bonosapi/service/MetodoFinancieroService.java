@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MetodoFinancieroService {
 
@@ -48,6 +50,12 @@ public class MetodoFinancieroService {
         MetodoFinanciero metodoFinanciero = metodoFinancieroRepository.findMetodoFinancieroByMetodo(metodo);
         if (metodoFinanciero == null) throw new ResourceNotFoundException("No existe el método financiero");
         return metodoFinanciero;
+    }
+
+    @Transactional(readOnly = true)
+    public List<MetodoFinanciero> getMetodosFinancieros() {
+        List<MetodoFinanciero> metodos = metodoFinancieroRepository.findAll();
+        return metodos;
     }
 
     @Transactional

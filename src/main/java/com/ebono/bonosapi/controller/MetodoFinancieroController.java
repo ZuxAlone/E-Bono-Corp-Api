@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api
 @RestController
 @RequestMapping("/metodoFinanciero")
@@ -46,6 +48,12 @@ public class MetodoFinancieroController {
     public ResponseEntity<MetodoFinancieroResponse> getMetodoFinancieroByMetodo(@PathVariable String metodo) throws Exception {
         MetodoFinanciero metodoFinanciero = metodoFinancieroService.getMetodoFinancieroByMetodo(metodo);
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoMetodoFinanciero(metodoFinanciero), HttpStatus.OK);
+    }
+
+    @GetMapping("/getMetodos")
+    public ResponseEntity<List<MetodoFinancieroResponse>> getMetodosFinancieros() throws Exception {
+        List<MetodoFinanciero> metodos = metodoFinancieroService.getMetodosFinancieros();
+        return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoMetodoFinanciero(metodos), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

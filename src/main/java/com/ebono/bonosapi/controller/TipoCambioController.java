@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api
 @RestController
 @RequestMapping("/tipoCambio")
@@ -46,6 +48,12 @@ public class TipoCambioController {
     public ResponseEntity<TipoCambioResponse> getTipoCambioByMoneda(@PathVariable Character moneda) throws Exception {
         TipoCambio tipoCambio = tipoCambioService.getTipoCambioByMoneda(moneda);
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoTipoCambio(tipoCambio), HttpStatus.OK);
+    }
+
+    @GetMapping("/getCambios")
+    public ResponseEntity<List<TipoCambioResponse>> getTipoCambios() throws Exception {
+        List<TipoCambio> cambios = tipoCambioService.getTipoCambios();
+        return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoTipoCambio(cambios), HttpStatus.OK);
     }
 
     @DeleteMapping("/id")

@@ -9,8 +9,11 @@ import com.ebono.bonosapi.service.BonoService;
 import com.ebono.bonosapi.utils.WrapperResponse;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api
 @RestController
@@ -26,16 +29,26 @@ public class BonoController {
     }
 
     @PostMapping("/primario")
-    public ResponseEntity<WrapperResponse<BonoResponse>> simularBonoPrimario(@RequestBody BonoRequest bonoRequest) {
+    public ResponseEntity<BonoResponse> simularBonoPrimario(@RequestBody BonoRequest bonoRequest) {
         Bono bono = bonoService.simularBonoPrimario(bonoRequest);
-        return new WrapperResponse<>(true, "Bono Simulado!!", bonoConverter.fromEntity(bono))
-                .createResponse();
+        return new ResponseEntity<>(bonoConverter.fromEntity(bono), HttpStatus.CREATED);
     }
 
     @PostMapping("/secundario/{id}")
-    public ResponseEntity<WrapperResponse<BonoResponse>> simularBonoSecundario(@PathVariable Long id, @RequestBody BonoRequestSec bonoRequestSec) {
+    public ResponseEntity<BonoResponse> simularBonoSecundario(@PathVariable Long id, @RequestBody BonoRequestSec bonoRequestSec) {
         Bono bono = bonoService.simularBonoSecundario(id, bonoRequestSec);
-        return new WrapperResponse<>(true, "Bono Sec Simulado!!", bonoConverter.fromEntity(bono))
-                .createResponse();
+        return new ResponseEntity<>(bonoConverter.fromEntity(bono), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/primarios")
+    public ResponseEntity<List<BonoResponse>> findBonosPrimarios() throws Exception {
+        List<Bono> bonos = bonoService.findBonosPrimarios();
+        return new ResponseEntity<>(bonoConverter.fromList(bonos), HttpStatus.OK);
+    }
+
+    @GetMapping("/secundarios")
+    public ResponseEntity<List<BonoResponse>> findBonosSecundarios() throws Exception {
+        List<Bono> bonos = bonoService.findBonosSecundarios();
+        return new ResponseEntity<>(bonoConverter.fromList(bonos), HttpStatus.OK);
     }
 }

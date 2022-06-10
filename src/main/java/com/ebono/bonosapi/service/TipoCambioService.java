@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class TipoCambioService {
 
@@ -48,6 +50,12 @@ public class TipoCambioService {
         TipoCambio tipoCambio = tipoCambioRepository.findTipoCambioByTipoCambio(moneda);
         if (tipoCambio == null) throw new ResourceNotFoundException("No existe el tipo de moneda");
         return tipoCambio;
+    }
+
+    @Transactional(readOnly = true)
+    public List<TipoCambio> getTipoCambios() {
+        List<TipoCambio> cambios = tipoCambioRepository.findAll();
+        return cambios;
     }
 
     @Transactional

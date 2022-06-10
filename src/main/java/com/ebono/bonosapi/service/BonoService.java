@@ -9,6 +9,7 @@ import com.ebono.bonosapi.entities.Usuario;
 import com.ebono.bonosapi.repositories.BonoRepository;
 import com.ebono.bonosapi.repositories.MetodoFinancieroRepository;
 import com.ebono.bonosapi.repositories.TipoCambioRepository;
+import com.ebono.bonosapi.repositories.UsuarioRepository;
 import com.ebono.bonosapi.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,16 @@ import java.util.List;
 @Service
 public class BonoService {
 
+    private final UsuarioRepository usuarioRepository;
     private final BonoRepository bonoRepository;
     private final TipoCambioRepository tipoCambioRepository;
     private final MetodoFinancieroRepository metodoFinancieroRepository;
 
-    public BonoService(BonoRepository bonoRepository, TipoCambioRepository tipoCambioRepository, MetodoFinancieroRepository metodoFinancieroRepository) {
+    public BonoService(BonoRepository bonoRepository, TipoCambioRepository tipoCambioRepository, MetodoFinancieroRepository metodoFinancieroRepository, UsuarioRepository usuarioRepository) {
         this.bonoRepository = bonoRepository;
         this.tipoCambioRepository = tipoCambioRepository;
         this.metodoFinancieroRepository = metodoFinancieroRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -45,6 +48,18 @@ public class BonoService {
         Bono bonoDb = bonoRepository.getById(id);
         Bono bono = buildBonoSec(bonoDb, bonoRequestSec);
         return bonoRepository.save(bono);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Bono> findBonosPrimarios() {
+        List<Bono> bonos = bonoRepository.findBonosPrimarios();
+        return bonos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Bono> findBonosSecundarios() {
+        List<Bono> bonos = bonoRepository.findBonosSecundarios();
+        return bonos;
     }
 
     private Bono buildBono(BonoRequest bonoRequest) {
@@ -117,13 +132,17 @@ public class BonoService {
         bono.setConvexidad(convexidad);
         bono.setIsPrimario(true);
 
+        usuario.setNum_bonos_simulados(usuario.getNum_bonos_simulados()+1);
+        usuarioRepository.save(usuario);
+
         return bono;
     }
 
     private Bono buildBonoSec(Bono bonoDb, BonoRequestSec bonoRequestSec) {
         Bono bono = new Bono();
 
-        bono.setUsuario(UserPrincipal.getCurrentUser());
+        Usuario usuario = UserPrincipal.getCurrentUser();
+        bono.setUsuario(usuario);
         bono.setMetodoFinanciero(bonoDb.getMetodoFinanciero());
         bono.setTipoCambio(bonoDb.getTipoCambio());
 
@@ -181,6 +200,9 @@ public class BonoService {
         bono.setDuracionModificada(duracionModificada);
         bono.setConvexidad(convexidad);
         bono.setIsPrimario(false);
+
+        usuario.setNum_bonos_simulados(usuario.getNum_bonos_simulados()+1);
+        usuarioRepository.save(usuario);
 
         return bono;
     }
