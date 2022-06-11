@@ -80,6 +80,10 @@ public class BonoService {
 
         String periodoPago = bonoRequest.getPeriodoPago();
 
+        String tipoTasa = bonoRequest.getTipoTasa();
+        if (tipoTasa.equals("Nominal"))
+            tasaAnual = (Math.pow(1.0+ tasaAnual/360, 360) - 1);
+
         switch (periodoPago) {
             case "Anual":
                 tasaPeriodo = tasaAnual;
@@ -107,6 +111,7 @@ public class BonoService {
                 break;
         }
 
+        tasaAnual = tasaAnual * 100;
         Double valorNominal = bonoRequest.getValorNominal();
         Double anualidad = (valorNominal * tasaPeriodo/100) / (1.0 - Math.pow(1.0 + tasaPeriodo/100, -numeroPeriodos));
         bono.anualidades = new ArrayList<Double>(Collections.nCopies(numeroPeriodos, anualidad));
@@ -156,6 +161,10 @@ public class BonoService {
 
         String periodoPago = bonoDb.getPeriodoPago();
 
+        String tipoTasa = bonoRequestSec.getTipoTasaSec();
+        if (tipoTasa.equals("Nominal"))
+            tasaAnual = (Math.pow(1.0+ tasaAnual/360, 360) - 1);
+
         switch (periodoPago) {
             case "Anual":
                 tasaPeriodo = tasaAnual;
@@ -177,6 +186,7 @@ public class BonoService {
                 break;
         }
 
+        tasaAnual = tasaAnual * 100;
         Double tasaPeriodoOrig = bonoDb.getTasaPeriodo();
         Double valorBonoOrg = anualidad * ((1.0 - Math.pow(1.0 + tasaPeriodoOrig/100, -periodosRestantes)) / (tasaPeriodoOrig/100));
         Double valorBono = anualidad * ((1.0 - Math.pow(1.0 + tasaPeriodo/100, -periodosRestantes)) / (tasaPeriodo/100));

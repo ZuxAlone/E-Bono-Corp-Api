@@ -14,7 +14,7 @@ public class BonoResponse {
     private String metodoFinanciero;
     private Double valorNominal;
     private String periodoPago;
-    private Double tasaPeriodo;
+    private Double tasaAnual;
     private Integer numeroPeriodos;
     private Double anualidad;
     private Double van;

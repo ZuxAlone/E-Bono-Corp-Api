@@ -16,5 +16,8 @@ public class BonoRequestSec {
     private Double tasaAnualSec;
     @NotBlank
     @NotNull
+    private String tipoTasaSec;
+    @NotBlank
+    @NotNull
     private Integer numPeriodoCompra;
 }

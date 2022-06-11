@@ -26,7 +26,7 @@ public class BonoConverter {
                 .metodoFinanciero(bono.getMetodoFinanciero().getMetodo())
                 .valorNominal(bono.getValorNominal())
                 .periodoPago(bono.getPeriodoPago())
-                .tasaPeriodo(bono.getTasaPeriodo())
+                .tasaAnual(bono.getTasaAnual())
                 .numeroPeriodos(bono.getNumeroPeriodos())
                 .anualidad(bono.getAnualidad())
                 .van(bono.getVan())

@@ -19,6 +19,9 @@ public class BonoRequest {
     private Double tasaAnual;
     @NotBlank
     @NotNull
+    private String tipoTasa;
+    @NotBlank
+    @NotNull
     private String periodoPago;
     @NotBlank
     @NotNull
