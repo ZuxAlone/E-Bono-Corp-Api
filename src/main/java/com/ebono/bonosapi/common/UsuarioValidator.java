@@ -5,8 +5,8 @@ import com.ebono.bonosapi.exception.BadResourceRequestException;
 
 public class UsuarioValidator {
     public static boolean validateUser(SignupRequest usuario) {
-        if(usuario.getNombres().isBlank() || usuario.getApellidos().isBlank() || usuario.getCorreo().isBlank()
-                || usuario.getPassword().isBlank()) {
+        if(usuario.getNombres().isEmpty() || usuario.getApellidos().isEmpty() || usuario.getCorreo().isEmpty()
+                || usuario.getPassword().isEmpty()) {
             throw new BadResourceRequestException("Completar todos los datos en blanco.");
         }
         return true;
