@@ -9,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 public class TipoCambioResponse {
     private Long id;
-    private Character tipoCambio;
+    private String tipoCambio;
     private String detalle;
 }
