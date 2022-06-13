@@ -10,7 +10,7 @@ import lombok.*;
 public class BonoResponse {
     private Long id;
     private UsuarioResponse usuarioResponse;
-    private Character tipoCambio;
+    private String tipoCambio;
     private String metodoFinanciero;
     private Double valorNominal;
     private String periodoPago;
