@@ -242,7 +242,7 @@ public class BonoService {
     private Double calcularConvexidad(Double valorBono, Double tir, List<Double> anualidades) {
         Double convexidad = 0.0;
         for (int i = 0; i<anualidades.size(); i++)
-            convexidad += ((Math.pow(i+1, 2) + i+1) * anualidades.get(i)) / Math.pow(1.0 + tir, i+1);
+            convexidad += ((Math.pow(i+1, 2) + i+1) * anualidades.get(i)) / Math.pow(1.0 + tir/100, i+1);
         convexidad /= (valorBono * Math.pow(1.0 + tir/100, 2));
         return convexidad;
     }
