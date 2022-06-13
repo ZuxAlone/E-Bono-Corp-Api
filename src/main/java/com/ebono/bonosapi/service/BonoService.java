@@ -67,7 +67,7 @@ public class BonoService {
 
         Usuario usuario = UserPrincipal.getCurrentUser();
         MetodoFinanciero metodoFinanciero = metodoFinancieroRepository.findMetodoFinancieroByMetodo(bonoRequest.getMetodoFinanciero());
-        TipoCambio tipoCambio = tipoCambioRepository.findTipoCambioByTipoCambio(bonoRequest.getTipoCambio().charAt(0));
+        TipoCambio tipoCambio = tipoCambioRepository.findTipoCambioByTipoCambio(bonoRequest.getTipoCambio());
 
         bono.setUsuario(usuario);
         bono.setMetodoFinanciero(metodoFinanciero);

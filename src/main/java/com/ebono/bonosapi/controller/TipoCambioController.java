@@ -45,7 +45,7 @@ public class TipoCambioController {
     }
 
     @GetMapping("/get/{moneda}")
-    public ResponseEntity<TipoCambioResponse> getTipoCambioByMoneda(@PathVariable Character moneda) throws Exception {
+    public ResponseEntity<TipoCambioResponse> getTipoCambioByMoneda(@PathVariable String moneda) throws Exception {
         TipoCambio tipoCambio = tipoCambioService.getTipoCambioByMoneda(moneda);
         return new ResponseEntity<>(entityDtoConverter.convertEntityToDtoTipoCambio(tipoCambio), HttpStatus.OK);
     }

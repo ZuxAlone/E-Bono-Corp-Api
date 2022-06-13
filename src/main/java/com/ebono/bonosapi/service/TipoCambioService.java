@@ -46,7 +46,7 @@ public class TipoCambioService {
     }
 
     @Transactional(readOnly = true)
-    public TipoCambio getTipoCambioByMoneda(Character moneda) {
+    public TipoCambio getTipoCambioByMoneda(String moneda) {
         TipoCambio tipoCambio = tipoCambioRepository.findTipoCambioByTipoCambio(moneda);
         if (tipoCambio == null) throw new ResourceNotFoundException("No existe el tipo de moneda");
         return tipoCambio;
